@@ -1,7 +1,6 @@
 
 {
     'name': 'Odoo Liquor Store Management System',
-    'version': '17.0.1.1.0',  # Format: [Odoo version].[Major]
     'depends' : ['mail', 'base', 'web', 'sale', 'board'],
     'author': 'Omni Software Ltd',
     'sequence': 1,
@@ -47,10 +46,10 @@
     'installable': True,
     'assets': {
         'web.assets_backend': [
-            'liquor_store/static/src/components/**/*.js',
-            'liquor_store/static/src/components/**/*.xml',
-            'liquor_store/static/src/components/**/*.scss',
-            'liquor_store/static/src/**/*',
+            'liquor_store_management/static/src/components/**/*.js',
+            'liquor_store_management/static/src/components/**/*.xml',
+            'liquor_store_management/static/src/components/**/*.scss',
+            'liquor_store_management/static/src/**/*',
         ],
     },
     'images': ['static/description/banner.jpg'],
