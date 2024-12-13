@@ -3,7 +3,7 @@
     <menuitem
         id="liquor_store_menu_root"
         name="Liquor Store"
-        web_icon="liquor_store,static/description/icon.jpeg"
+        web_icon="liquor_store_management,static/description/icon.png"
     />
 
     <!-- Products Menu -->
