@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+     <!-- Liquor Store Brand Tree View -->
+    <record id="liquor_store_brand_tree" model="ir.ui.view">
+        <field name="name">liquor_store.brand.tree</field>
+        <field name="model">liquor_store.brand</field>
+        <field name="arch" type="xml">
+            <tree string="Liquor Store Brand">
+                <field name="name" />
+                <field name="description" />
+                <field name="quantity" />
+                <field name="sold_bottle_count" />
+                <field name="total_profit" />
+            </tree>
+        </field>
+    </record>
+
+     <!-- Liquor Store Brand Kanban View -->
+    <record id="liquor_store_brand_kanban" model="ir.ui.view">
+        <field name="name">liquor_store.brand.kanban</field>
+        <field name="model">liquor_store.brand</field>
+        <field name="arch" type="xml">
+            <kanban groups_draggable="False">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div>
+                                <field name="name" />
+                            </div>
+                            <div>
+                                <field name="description" />
+                            </div>
+                            <div>
+                                <field name="quantity" />
+                            </div>
+                            <div>
+                                <field name="sold_bottle_count" />
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+     <!-- Liquor Store Brand Search View -->
+    <record id="liquor_store_brand_search" model="ir.ui.view">
+        <field name="name">liquor_store.brand.search</field>
+        <field name="model">liquor_store.brand</field>
+        <field name="arch" type="xml">
+            <search string="Liquor Store Brand">
+            </search>
+        </field>
+    </record>
+
+     <!-- Liquor Store Brand Form View -->
+    <record id="liquor_store_brand_form" model="ir.ui.view">
+        <field name="name">liquor_store.brand.form</field>
+        <field name="model">liquor_store.brand</field>
+        <field name="arch" type="xml">
+            <form string="Liquor Store Brand">
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="description" />
+                        <field name="quantity" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Liquor Store Brand Graph View -->
+    <record id="brand_graph" model="ir.ui.view">
+        <field name="name">liquor_store.brand.graph</field>
+        <field name="model">liquor_store.brand</field>
+        <field name="arch" type="xml">
+            <graph string="Brand Graph" type="pie">
+                <field name="name"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="liquor_store_brand_action" model="ir.actions.act_window">
+        <field name="name">Brands</field>
+        <field name="res_model">liquor_store.brand</field>
+        <field name="domain">[]</field>
+        <field name="view_mode">tree,form,graph</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No brands found. Let's create one!
+            </p>
+            <p>
+                Create brands for your store.
+            </p>
+        </field>
+    </record>
+
+</odoo>

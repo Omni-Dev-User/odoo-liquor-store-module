@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+        id="liquor_store_menu_root"
+        name="Liquor Store"
+        web_icon="liquor_store,static/description/icon.jpeg"
+    />
+
+    <!-- Products Menu -->
+    <menuitem
+        id="liquor_store_products_menu"
+        name="Products"
+        parent="liquor_store_menu_root"
+        sequence="1"
+    />
+    <!-- Brands -->
+    <menuitem
+        id="liquor_store_brands_products_menu_action"
+        action="liquor_store_brand_action"
+        parent="liquor_store_products_menu"
+        sequence="1"
+    />
+    <!-- Bottles -->
+    <menuitem
+        id="liquor_store_bottles_products_menu_action"
+        action="liquor_store_bottle_action"
+        parent="liquor_store_products_menu"
+        sequence="2"
+    />
+    <!-- Sizes -->
+    <menuitem
+        id="liquor_store_bottle_sizes_products_menu_action"
+        action="liquor_store_bottle_size_action"
+        parent="liquor_store_products_menu"
+        sequence="3"
+    />
+
+
+    <!-- Sales Menu -->
+    <menuitem
+        id="liquor_store_sales_menu"
+        name="Sales"
+        parent="liquor_store_menu_root"
+        sequence="3"
+    />
+    <!-- Sales Order -->
+    <menuitem
+        id="liquor_store_sales_order_menu_action"
+        action="liquor_store_sales_order_action"
+        parent="liquor_store_sales_menu"
+        sequence="1"
+    />
+    <!-- Customer -->
+    <menuitem
+        id="liquor_store_customer_menu_action"
+        action="liquor_store_customer_action"
+        parent="liquor_store_sales_menu"
+        sequence="2"
+    />
+
+    <!-- Payment Type Reporting -->
+    <menuitem
+        id="liquor_store_sales_payment_type_menu_action"
+        action="action_sales_analysis_payment_type_report"
+        parent="liquor_store_sales_menu"
+        sequence="3"
+    />
+    
+    <!-- Sales Analysis Report Menu Item -->
+    <menuitem id="menu_sales_analysis_report_action" name="Sales Analysis Report" parent="liquor_store_sales_menu" action="action_sales_analysis_report"/>
+
+    <!-- Dashboard Menu -->
+    <menuitem name="Sales Dashboard" id="liquor_store_sales_dashboard" sequence="0" action="action_owl_sales_dashboard" parent="liquor_store_menu_root"/>
+</odoo>

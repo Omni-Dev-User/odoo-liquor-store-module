@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Request for Quotation Form View -->
+    <record id="liquor_store_request_for_quotation_form" model="ir.ui.view">
+        <field name="name">liquor_store.rfq.form</field>
+        <field name="model">liquor_store.rfq</field>
+        <field name="arch" type="xml">
+            <form string="Request for Quotation">
+                <sheet>
+                    <header>
+                        <button name="action_send_rfq" string="Send RFQ" type="object"/>
+                        <button name="action_accept_rfq" string="Accept" type="object"/>
+                        <button name="action_reject_rfq" string="Reject" type="object"/>
+                        <button name="action_create_invoice" string="Create Invoice"  type="object"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,sent,accepted,rejected"/>
+                    </header>
+                    <group>
+                        <group>
+                            <field name="customer_id"/>
+                        </group>
+                        <notebook>
+                            <page string="RFQ Lines">
+                                <field name="rfq_line_ids" widget="one2many_list">
+                                    <tree string="RFQ Lines" editable="bottom">
+                                        <field name="bottle_id"/>
+                                        <field name="quantity"/>
+                                        <field name="unit_price"/>
+                                        <field name="subtotal" readonly="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <field name="total_amount" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Request for Quotation Tree View -->
+    <record id="liquor_store_request_for_quotation_tree" model="ir.ui.view">
+        <field name="name">liquor_store.rfq.tree</field>
+        <field name="model">liquor_store.rfq</field>
+        <field name="arch" type="xml">
+            <tree string="Request for Quotations">
+                <field name="customer_id"/>
+                <field name="state"/>
+                <field name="total_amount"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Request for Quotation Kanban View -->
+    <!-- Placeholder: Define your Kanban view here -->
+
+    <record id="liquor_store_rfq_action" model="ir.actions.act_window">
+        <field name="name">Request for Quotation</field>
+        <field name="res_model">liquor_store.rfq</field>
+        <field name="domain">[]</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No quotations found. Let's create one!
+            </p>
+            <p>
+                Create quotations for your store.
+            </p>
+        </field>
+    </record>
+
+</odoo>

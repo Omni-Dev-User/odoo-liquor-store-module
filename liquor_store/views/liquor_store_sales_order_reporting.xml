@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Liquor Store Sales Order Search View -->
+    <record id="liquor_store_sales_order_search_view" model="ir.ui.view">
+        <field name="name">liquor_store.sales.order.search</field>
+        <field name="model">liquor_store.sales.order</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter name="groupby_date" string="Group By">
+                    <field name="date" string="Date Sold"/>
+                    <filter name="groupby_date" string="Date" context="{'group_by': 'date:year'}"/>
+                </filter>
+            </search>
+        </field>
+    </record>
+
+    
+    <!-- Liquor Store Sales Pivot View -->
+    <record id="sales_order_pivot" model="ir.ui.view">
+        <field name="name">liquor_store.sales.order.pivot</field>
+        <field name="model">liquor_store.sales.order</field>
+        <field name="arch" type="xml">
+            <pivot string="Sales Pivot">
+                <field name="date" type="row" string="Date Sold"/>
+                <field name="total_amount" type="measure" string="Total Sale Amount"/>
+                <field name="state" type="col" string="Status"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Liquor Store Sales Graph View -->
+    <record id="sales_order_graph" model="ir.ui.view">
+        <field name="name">liquor_store.sales.order.graph</field>
+        <field name="model">liquor_store.sales.order</field>
+        <field name="type">graph</field>
+        <field name="arch" type="xml">
+            <graph string="Sales Graph" type="pie">
+                <field name="date" type="date" string="Date Sold"/>
+                <field name="total_amount" type="measure" string="Total Sale Amount"/>
+                <field name="state" type="row_group" string="Status"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="liquor_store_sales_order_reporting_action" model="ir.actions.act_window">
+        <field name="name">Sales Order Reporting</field>
+        <field name="res_model">liquor_store.sales.order</field>
+        <field name="domain">[]</field>
+        <field name="view_mode">graph,pivot</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No sale orders found. 
+            </p>
+            <p>
+                Create sale orders for your store.
+            </p>
+        </field>
+    </record>
+
+
+    </odoo>

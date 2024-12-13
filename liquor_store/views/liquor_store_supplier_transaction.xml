@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Liquor Store Transaction Tree View -->
+    <record id="liquor_store_supplier_transaction_tree" model="ir.ui.view">
+        <field name="name">liquor_store.supplier_transaction.tree</field>
+        <field name="model">liquor_store.supplier_transaction</field>
+        <field name="arch" type="xml">
+            <tree string="Liquor Store Supplier Transaction">
+                <field name="supplier"/>               
+                <field name="brand"/>               
+                <field name="order_date"/>               
+                <field name="unit_price"/>               
+                <field name="amount"/>   
+                <field name="date_received"/>  
+                <field name="status"/>             
+            </tree>
+        </field>
+    </record>
+
+    <!-- Liquor Store Transaction Kanban View -->
+    <record id="liquor_store_supplier_transaction_kanban" model="ir.ui.view">
+        <field name="name">liquor_store.supplier_transaction.kanban</field>
+        <field name="model">liquor_store.supplier_transaction</field>
+        <field name="arch" type="xml">
+            <kanban groups_draggable="False">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div>
+                                <field name="supplier"/> 
+                            </div>
+                            <div>               
+                                <field name="brand"/>   
+                            </div>
+                            <div>             
+                                <field name="order_date"/>  
+                            </div>
+                            <div>             
+                                <field name="unit_price"/>   
+                            </div>
+                            <div>               
+                                <field name="amount"/>  
+                            </div>
+                            <div>               
+                                <field name="date_received"/>
+                            </div>
+                            <div>                 
+                                <field name="status"/>   
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Liquor Store Transaction Search View -->
+    <record id="liquor_store_supplier_transaction_search" model="ir.ui.view">
+        <field name="name">liquor_store.supplier_transaction.search</field>
+        <field name="model">liquor_store.supplier_transaction</field>
+        <field name="arch" type="xml">
+            <search string="Liquor Store Supplier Transaction">
+            </search>
+        </field>
+    </record>
+
+    <!-- Liquor Store Transaction Form View -->
+    <record id="liquor_store_supplier_transaction_form" model="ir.ui.view">
+        <field name="name">liquor_store.supplier_transaction.form</field>
+        <field name="model">liquor_store.supplier_transaction</field>
+        <field name="arch" type="xml">
+            <form string="Liquor Store Supplier Transaction">
+                <header>
+                    <button name="action_send_mail" type="object" string="Send Mail"/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                        invisible="status in ('completed')" />
+                    <field name="status" widget="statusbar"
+                        statusbar_visible="new,pending,completed" />
+                </header>
+                <sheet>
+                    <group>
+                        <field name="supplier"/>               
+                        <field name="brand"/>               
+                        <field name="order_date"/>               
+                        <field name="unit_price"/>               
+                        <field name="amount"/>  
+                        <field name="date_received"/>  
+                        <field name="status"/>  
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Liquor Store Supplier Transaction Graph View -->
+    <record id="supplier_transaction_graph" model="ir.ui.view">
+        <field name="name">liquor_store.supplier_transaction.graph</field>
+        <field name="model">liquor_store.supplier_transaction</field>
+        <field name="arch" type="xml">
+            <graph string="Supplier Transaction Graph" type="bar">
+                <field name="brand"/>
+                <field name="amount" type="measure"/>
+                <field name="status" type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Liquor Store Transaction Action -->
+    <record id="liquor_store_supplier_transaction_action" model="ir.actions.act_window">
+        <field name="name">Supplier Transactions</field>
+        <field name="res_model">liquor_store.supplier_transaction</field>
+        <field name="domain">[]</field>
+        <field name="view_mode">tree,form,kanban,graph</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No supplier transactions found. Let's create one!
+            </p>
+            <p>
+                Create supplier transactions for your store.
+            </p>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_invoice_form" model="ir.ui.view">
+        <field name="name">liquor_store.form</field>
+        <field name="model">liquor_store.invoice</field>
+        <field name="arch" type="xml">
+            <form string="Invoice">
+                <sheet>
+                    <header>
+                        <button name="action_confirm_invoice" string="Confirm Invoice" type="object" />
+                        <!-- <button name="action_create_payment_popup" string="Create Payment"
+                            type="object" /> -->
+                    </header>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="state" widget="statusbar" statusbar_visible="draft,posted" />
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="customer_id" />
+                        <field name="invoice_line_ids" />
+                        <field name="subtotal" readonly="1" />
+                        <field name="tax" />
+                        <field name="total_amount_due" readonly="1" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Invoice Tree View -->
+    <record id="liquor_store_invoice_tree" model="ir.ui.view">
+        <field name="name">liquor_store.invoice.tree</field>
+        <field name="model">liquor_store.invoice</field>
+        <field name="arch" type="xml">
+            <tree string="Invoices">
+                <field name="customer_id" />
+                <field name="state" />
+                <field name="total_amount_due" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="liquor_store_invoice_action" model="ir.actions.act_window">
+        <field name="name">Invoice</field>
+        <field name="res_model">liquor_store.invoice</field>
+        <field name="domain">[]</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No invoices found. Let's create one!
+            </p>
+            <p>
+                Create invoices for your store.
+            </p>
+        </field>
+    </record>
+
+
+</odoo>

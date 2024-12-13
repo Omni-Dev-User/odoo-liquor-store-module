@@ -1,0 +1,17 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_liquor_store_brand,access.liquor_store.brand,model_liquor_store_brand,base.group_user,1,1,1,1
+access_liquor_store_bottle,access.liquor_store.bottle,model_liquor_store_bottle,base.group_user,1,1,1,1
+access_liquor_store_supplier,access.liquor_store.supplier,model_liquor_store_supplier,base.group_user,1,1,1,1
+access_liquor_store_supplier_transaction,access.liquor_store.supplier_transaction,model_liquor_store_supplier_transaction,base.group_user,1,1,1,1
+access_liquor_store_customer,access.liquor_store.customer,model_liquor_store_customer,base.group_user,1,1,1,1
+access_liquor_store_rfq,access.liquor_store.rfq,model_liquor_store_rfq,base.group_user,1,1,1,1
+access_liquor_store_rfq_line,access.liquor_store.rfq_line,model_liquor_store_rfq_line,base.group_user,1,1,1,1
+access_liquor_store_sales_order,access.liquor_store.sales.order,model_liquor_store_sales_order,base.group_user,1,1,1,1
+access_liquor_store_sales_analysis,access.liquor_store.sales.analysis,model_liquor_store_sales_analysis,base.group_user,1,1,1,1
+access_liquor_store_sales_order_line,access.liquor_store.sales.order.line,model_liquor_store_sales_order_line,base.group_user,1,1,1,1
+access_liquor_store_invoice,access.liquor_store.invoice,model_liquor_store_invoice,base.group_user,1,1,1,1
+access_liquor_store_invoice_line,access.liquor_store.invoice_line,model_liquor_store_invoice_line,base.group_user,1,1,1,1
+access_liquor_store_payment,access.liquor_store.payment,model_liquor_store_payment,base.group_user,1,1,1,1
+access_liquor_store_payment_details,access.liquor_store.payment.details,model_liquor_store_payment_details,base.group_user,1,1,1,1
+access_liquor_store_bottle_size,access.liquor_store.bottle_size,model_liquor_store_bottle_size,base.group_user,1,1,1,1
+access_liquor_store_bottle_variant,access.liquor_store.bottle_variant,model_liquor_store_bottle_variant,base.group_user,1,1,1,1

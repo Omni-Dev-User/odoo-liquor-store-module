@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="liquor_store_bottle_tree" model="ir.ui.view">
+        <field name="name">liquor_store.bottle.tree</field>
+        <field name="model">liquor_store.bottle</field>
+        <field name="arch" type="xml">
+            <tree string="Liquor Store Bottle" decoration-success="status in ('sold')" decoration-bf="status in ('sold')">
+                <field name="brand"/>
+                <field name="barcode_number"/>
+                <field name="capacity"/>
+                <field name="variants" widget="many2many_tags" />
+                <field name="purchase_date"/>
+                <field name="selling_date"/>
+                <field name="purchase_cost"/>
+                <field name="selling_price"/>
+                <field name="status"/>                 
+            </tree>
+        </field>
+    </record>
+
+    <record id="liquor_store_bottle_kanban" model="ir.ui.view">
+        <field name="name">liquor_store.bottle.kanban</field>
+        <field name="model">liquor_store.bottle</field>
+        <field name="arch" type="xml">
+            <kanban groups_draggable="False">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div>
+                                <field name="brand" />
+                            </div>
+                            <div>
+                                <field name="barcode_number" />
+                            </div>
+                            <div>
+                                <field name="status" />
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="liquor_store_bottle_search" model="ir.ui.view">
+        <field name="name">liquor_store.bottle.search</field>
+        <field name="model">liquor_store.bottle</field>
+        <field name="arch" type="xml">
+            <search string="Liquor Store Bottle">
+                <field name="brand"/>
+                <field name="barcode_number"/>
+                <field name="capacity"/>
+                <field name="purchase_date"/>
+                <field name="purchase_cost"/>
+                <field name="selling_price"/>
+                <field name="status"/> 
+                <filter name="available" string="Available"
+                    domain="[('status', '=', 'available')]" help="Show only available" />
+            </search>
+        </field>
+    </record>    
+
+    <record id="liquor_store_bottle_form" model="ir.ui.view">
+        <field name="name">liquor_store.bottle.form</field>
+        <field name="model">liquor_store.bottle</field>
+        <field name="arch" type="xml">
+            <form string="Liquor Store Bottle">
+                <header>
+                    <field name="status" widget="statusbar"
+                        statusbar_visible="available,sold" />
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Sold" bg_color="bg-success" invisible="status == 'available'" />
+                    <group>
+                        <field name="brand" readonly="status == 'sold'"/>
+                        <field name="barcode_number" readonly="status == 'sold'"/>
+                        <field name="size" readonly="status == 'sold'"/>  
+                        <field name="capacity" readonly="True"/>
+                        <field name="purchase_date" readonly="status == 'sold'"/>
+                        <field name="purchase_cost" readonly="status == 'sold'"/>
+                        <field name="selling_price" readonly="status == 'sold'"/>
+                        <field name="status" readonly="status == 'sold'"/>  
+                        <field name="variants">
+                            <tree string="Variants" editable="bottom">
+                                <field name="name"/>
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name="bottle_id"/>
+                                    <field name="name"/>
+                                </group>
+                            </form>
+                        </field>                            
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="liquor_store_bottle_action" model="ir.actions.act_window">
+        <field name="name">Stock</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">liquor_store.bottle</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="domain">[]</field>
+        <field name="context">{'search_default_available': True}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No bottles found. Let's create one!
+            </p>
+            <p>
+                Create bottles for your store.
+            </p>
+        </field>
+    </record>    
+
+</odoo>

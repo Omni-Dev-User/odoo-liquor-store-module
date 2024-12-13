@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- report for supplier transaction -->
+    <report
+        id="report_liquor_store_supplier_transaction"
+        string="Supplier Transaction"
+        model="liquor_store.liquor_store_supplier_transaction"
+        report_type="qweb-pdf"
+        name="liquor_store.report_supplier_transaction"
+        file="liquor_store.report_supplier_transaction"/>
+
+</odoo>

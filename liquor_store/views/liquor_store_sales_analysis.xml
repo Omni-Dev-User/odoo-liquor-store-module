@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Sales Analysis Report Pivot View -->
+        <record id="view_sales_analysis_report_pivot" model="ir.ui.view">
+            <field name="name">Sales Analysis Report Pivot View</field>
+            <field name="model">liquor_store.sales.analysis</field>
+            <field name="arch" type="xml">
+                <pivot string="Sales Analysis Report Pivot">
+                    <field name="brand_id" type="row"/>
+                    <field name="total_sales_amount" type="measure" string="Total Sales Amount"/>
+                    <field name="quantity_sold" type="measure" string="Quantity Sold"/>
+                    <field name="total_profit" type="measure" string="Total Profit"/>
+                </pivot>
+            </field>
+        </record>
+
+        <!-- Sales Analysis Report Pivot Action -->
+        <record id="action_sales_analysis_report_pivot" model="ir.actions.act_window">
+            <field name="name">Sales Analysis Report Pivot</field>
+            <field name="res_model">liquor_store.sales.analysis</field>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" ref="view_sales_analysis_report_pivot"/>
+        </record>
+
+        <!-- Sales Analysis Report Graph View -->
+        <record id="view_sales_analysis_report_graph" model="ir.ui.view">
+            <field name="name">Sales Analysis Report Graph View</field>
+            <field name="model">liquor_store.sales.analysis</field>
+            <field name="arch" type="xml">
+                <graph string="Sales Analysis Report Graph">
+                    <field name="brand_id"/>
+                    <field name="total_sales_amount" type="measure" operator="sum"/>
+                    <field name="quantity_sold" type="measure" operator="sum"/>
+                    <field name="total_profit" type="measure" operator="sum"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- Sales Analysis Report Graph Action -->
+        <record id="action_sales_analysis_report_graph" model="ir.actions.act_window">
+            <field name="name">Sales Analysis Report Graph</field>
+            <field name="res_model">liquor_store.sales.analysis</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_sales_analysis_report_graph"/>
+        </record>
+
+        <!-- Sales Analysis Report Search View -->
+        <record id="view_sales_analysis_report_search" model="ir.ui.view">
+            <field name="name">Sales Analysis Report Search</field>
+            <field name="model">liquor_store.sales.analysis</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="brand_id"/>
+                    <field name="total_sales_amount" />
+                    <field name="quantity_sold" />
+                    <field name="total_profit" />
+                    <field name="selling_date" />
+                    <filter string="Last 7 Days" name="last_7_days" domain="[('selling_date', '&gt;=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d')), ('selling_date', '&lt;=', context_today().strftime('%Y-%m-%d'))]" help="Sales within the last 7 days"/>
+                    <filter string="Last 30 Days" name="last_30_days" domain="[('selling_date', '&gt;=', (context_today() - datetime.timedelta(days=30)).strftime('%Y-%m-%d')), ('selling_date', '&lt;=', context_today().strftime('%Y-%m-%d'))]" help="Sales within the last 30 days"/>
+                    <filter string="Last 90 Days" name="last_90_days" domain="[('selling_date', '&gt;=', (context_today() - datetime.timedelta(days=90)).strftime('%Y-%m-%d')), ('selling_date', '&lt;=', context_today().strftime('%Y-%m-%d'))]" help="Sales within the last 90 days"/>
+                    <filter string="Last 365 Days" name="last_365_days" domain="[('selling_date', '&gt;=', (context_today() - datetime.timedelta(days=365)).strftime('%Y-%m-%d')), ('selling_date', '&lt;=', context_today().strftime('%Y-%m-%d'))]" help="Sales within the last 365 days"/>
+                </search>
+            </field>
+        </record>
+        
+        
+
+        <!-- Sales Analysis Report Action -->
+        <record id="action_sales_analysis_report" model="ir.actions.act_window">
+            <field name="name">Sales Analysis Report</field>
+            <field name="res_model">liquor_store.sales.analysis</field>
+            <field name="view_mode">graph,pivot</field>
+            <field name="view_id" ref="view_sales_analysis_report_pivot"/>
+        </record>
+        
+    </data>
+</odoo>

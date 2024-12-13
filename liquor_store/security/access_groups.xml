@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record
+        id="module_category_liquor_store" model="ir.module.category">
+        <field name="name">Liquor Store Management</field>
+        <field name="description">Category for Liquor Store</field>
+        <field name="sequence">45</field>
+    </record>
+
+    <record
+        id="group_store_manager" model="res.groups">
+        <field name="name">Store Manager</field>
+        <field name="category_id" ref="module_category_liquor_store" />
+    </record>
+
+    <record
+        id="group_sales_person" model="res.groups">
+        <field name="name">Sales Person</field>
+        <field name="category_id" ref="module_category_liquor_store"/>
+    </record>
+
+</odoo>

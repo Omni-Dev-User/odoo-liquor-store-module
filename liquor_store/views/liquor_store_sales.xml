@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_sales_order_form" model="ir.ui.view">
+        <field name="name">liquor_store.sales.order.form</field>
+        <field name="model">liquor_store.sales.order</field>
+        <field name="arch" type="xml">
+            <form string="Sales Order">
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object"
+                        invisible="state not in ('quotation_sent')" />
+                    <button name="action_validate" string="Validate" type="object" invisible="state not in ('sales_order')" />
+                    <button name="action_return" string="Return" type="object" invisible="state not in ('done')" />
+                    <button name="print_sales_order_report" string="Print Receipt" type="object" class="oe_highlight" invisible="state not in ('done')" />
+                    <field name="state" widget="statusbar" statusbar_visible="quotation,quotation_sent,sales_order,done"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Done" bg_color="bg-success" invisible="state in ('quotation', 'sales_order', 'quotation_sent')" />
+                    <group>
+                        <field name="name_seq" />
+                        <field name="customer_id" />
+                        <field name="date" />
+                        <field name="order_line_ids">
+                            <tree string="Order Lines" editable="bottom">
+                                <field name="bottle_id" domain="[('status', '=', 'available')]"/>
+                                <field name="brand"/>
+                                <field name="unit_price"/>
+                                <field name="subtotal"/>
+                            </tree>
+                        </field>
+                        <field name="total_amount" readonly="1" />
+                        <field name="discount" />
+                        <!-- New fields for payment details -->
+                        <field name="payment_ids">
+                            <tree string="Payment Details" editable="bottom">
+                                <field name="order_id" options='{"no_create": true}' domain="[('id', '=', context.get('default_order_id'))]"/>
+                                <field name="payment_type"/>
+                                <field name="amount"/>
+                            </tree>
+                        </field>
+                        <field name="total_paid" readonly="1" />
+                        <field name="remaining_amount" readonly="1" />
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Sales Order Tree View -->
+    <record id="liquor_store_sales_order" model="ir.ui.view">
+        <field name="name">liquor_store.sales.order.tree</field>
+        <field name="model">liquor_store.sales.order</field>
+        <field name="arch" type="xml">
+            <tree string="Sales Orders">
+                <field name="name_seq" />
+                <field name="customer_id" />
+                <field name="total_amount" />
+                <field name="state"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+
+    <data>
+
+    <record id="liquor_store_sales_report_action" model="ir.actions.report">
+        <field name="name">Sales Order Receipt</field>
+        <field name="model">liquor_store.sales.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">liquor_store.report_sales_orders</field>
+        <field name="report_file">liquor_store.report_sales_orders</field>
+        <field name="binding_model_id" ref="model_liquor_store_sales_order"/>
+        <field name="binding_type">report</field>
+    </record>
+    </data>
+
+    <record id="liquor_store_sales_order_action" model="ir.actions.act_window">
+        <field name="name">Sales Order</field>
+        <field name="res_model">liquor_store.sales.order</field>
+        <field name="domain">[]</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No sale orders found. Let's create one!
+            </p>
+            <p>
+                Create sale orders for your store.
+            </p>
+        </field>
+    </record>
+
+</odoo>

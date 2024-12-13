@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+     <!-- Liquor Store Customer Tree View -->
+    <record id="liquor_store_customer_tree" model="ir.ui.view">
+        <field name="name">liquor_store.customer.tree</field>
+        <field name="model">liquor_store.customer</field>
+        <field name="arch" type="xml">
+            <tree string="Liquor Store Customer">
+                <field name="name" />
+                <field name="email" />
+                <field name="phone" />
+                <field name="address" />
+            </tree>
+        </field>
+    </record>
+
+
+     <!-- Liquor Store Customer Search View -->
+    <record id="liquor_store_customer_search" model="ir.ui.view">
+        <field name="name">liquor_store.customer.search</field>
+        <field name="model">liquor_store.customer</field>
+        <field name="arch" type="xml">
+            <search string="Liquor Store Customer">
+            </search>
+        </field>
+    </record>
+
+     <!-- Liquor Store Customer Form View -->
+    <record id="liquor_store_customer_form" model="ir.ui.view">
+        <field name="name">liquor_store.customer.form</field>
+        <field name="model">liquor_store.customer</field>
+        <field name="arch" type="xml">
+            <form string="Liquor Store Customer">
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="email" />
+                        <field name="phone" />
+                        <field name="address" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="liquor_store_customer_action" model="ir.actions.act_window">
+        <field name="name">Customers</field>
+        <field name="res_model">liquor_store.customer</field>
+        <field name="domain">[]</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No customers found. Let's create one!
+            </p>
+            <p>
+                Create customers for your store.
+            </p>
+        </field>
+    </record>
+
+</odoo>

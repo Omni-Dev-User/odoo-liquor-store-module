@@ -1,0 +1,82 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <template id="report_sales_orders">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <div class="container" style="max-width: 400px;"> 
+                        <div class="header">
+                            <h2 class="text-center"><t t-esc="user.company_id.name"/></h2>
+                            <p class="text-center"><t t-esc="user.company_id.street"/></p>
+                            <p class="text-center"><t t-esc="user.company_id.city"/>, <t t-esc="user.company_id.state_id.name"/> <t t-esc="user.company_id.zip"/></p>
+                            <p class="text-center">Phone: <t t-esc="user.company_id.phone"/> | Email: <t t-esc="user.company_id.email"/></p>
+                            <hr/>
+                        </div>
+                        <div class="main">
+                            <h2 class="text-center">Receipt</h2>
+                            <t t-foreach="docs" t-as="doc">
+                                <div>
+                                    <h3>Order Reference: <t t-esc="doc.name_seq"/></h3>
+                                    <p class="text-right">Date: <t t-esc="doc.date"/></p>
+                                    <p class="text-right">Salesperson: <t t-esc="user.name"/></p>
+                                </div>
+                                <table class="table table-bordered table-condensed mx-auto">
+                                    <thead>
+                                        <tr>
+                                            <th>Item</th>
+                                            <th>Unit Price</th>
+                                            <th>Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="doc.order_line_ids" t-as="line">
+                                            <tr>
+                                                <td><t t-esc="line.bottle_id.brand.name"/></td>
+                                                <td class="text-right"><t t-esc="line.unit_price"/></td>
+                                                <td class="text-right"><t t-esc="line.subtotal"/></td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="2" class="text-right"><b>Total:</b></td>
+                                            <td class="text-right"><t t-esc="doc.total_amount"/></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <p class="text-right">Discount: <t t-esc="doc.discount"/></p>
+                                <table class="table table-bordered table-condensed mx-auto">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2">Payment Type</th>
+                                            <th>Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="doc.payment_ids" t-as="line">
+                                            <tr>
+                                                <td colspan="2"><t t-esc="line.payment_type"/></td>
+                                                <td class="text-right"><t t-esc="line.amount"/></td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="2" class="text-right"><b>Amount Paid:</b></td>
+                                            <td class="text-right"><t t-esc="doc.total_paid"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="text-right"><b>Change:</b></td>
+                                            <td class="text-right"><t t-esc="doc.remaining_amount"/></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </t>
+                            <p class="text-center" style="font-style: italic;">Thank you for Shopping with Us</p>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

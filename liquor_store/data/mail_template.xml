@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data noupdate="0">
+        <record id="liquor_store_supplier_transaction_email_template" model="mail.template">
+            <field name="name">Supplier Transaction Email Template</field>
+            <field name="model_id" ref="liquor_store.model_liquor_store_supplier_transaction"/>
+            <field name="subject">Request for Product</field>
+            <field name="email_from">${user.email}</field>
+            <field name="email_to">{{object.supplier.email}}</field>
+            <!-- <field name="auto_delete" eval="True"/>   -->
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        <p>Dear <t t-esc="object.supplier.name"/>,</p>
+                        <p>We would like to inform you that the following transaction has been made:</p>
+                        <ul>
+                            <li><strong>Brand:</strong> <t t-esc="object.brand"/></li>
+                            <li><strong>Order Date:</strong> <t t-esc="object.order_date"/></li>
+                            <li><strong>Delivery Date:</strong> <t t-esc="object.delivery_date or ''"/></li>
+                            <li><strong>Unit Price:</strong> <t t-esc="object.unit_price"/></li>
+                            <li><strong>Amount:</strong> <t t-esc="object.amount"/></li>
+                        </ul>
+                        <p>Please review the details and let us know if you have any questions or concerns.</p>
+                        <p>Thank you for your cooperation.</p>
+                    </p>
+                </div>
+            </field>         
+        </record>
+    </data>
+</odoo>

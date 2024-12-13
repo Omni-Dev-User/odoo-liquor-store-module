@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Pivot View for Sales Order Payment Analysis -->
+        <record id="view_sales_order_payment_type_pivot" model="ir.ui.view">
+            <field name="name">Payment Type Analysis</field>
+            <field name="model">liquor_store.payment.details</field>
+            <field name="arch" type="xml">
+                <pivot string="Sales Order Payment Analysis">
+                    <field name="payment_type" type="row" string="Payment Type"/>
+                    <field name="date" type="col" interval="day"/>
+                    <field name="done_state_amount" type="measure" string="Amount Received"/>
+                </pivot>
+            </field>
+        </record>
+        
+        <!-- Sales Analysis Report Action -->
+        <record id="action_sales_analysis_payment_type_report" model="ir.actions.act_window">
+            <field name="name">Sales Payment Type Analysis</field>
+            <field name="res_model">liquor_store.payment.details</field>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" ref="view_sales_order_payment_type_pivot"/>
+        </record>
+    </data>
+</odoo>
